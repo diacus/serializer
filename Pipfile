@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+
+[dev-packages]
+flake8 = "*"
+pdbpp = "*"
+ptpython = "*"
+coverage = "*"
+nose2 = "*"
+
+[requires]
+python_version = "3.8"
