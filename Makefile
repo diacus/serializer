@@ -25,8 +25,14 @@ help: ## This play the help
 install: ## Install dependencies for production
 	pipenv install
 
-install-dev: ## Install dependencies for development
+install-dev: tags ## Install dependencies for development
 	pipenv install --dev
+
+install-sys: ## Install the package
+	pip3 install --upgrade .
+
+clean-sys: ## Uninstall the package
+	pip3 uninstall -y serializer
 
 lint: ## Run code linter
 	$(PIPENV_RUN) flake8 serializer test
