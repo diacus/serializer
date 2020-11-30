@@ -14,9 +14,7 @@ endif
 
 PYTHON := $(BIN)/python
 PIPENV_RUN := pipenv run
-FLAKE8 := $(BIN)/flake8
 COVERAGE := $(BIN)/coverage
-NOSE2 := $(BIN)/nose2
 
 export PIPENV_VENV_IN_PROJECT=1
 
@@ -31,13 +29,16 @@ install-dev: ## Install dependencies for development
 	pipenv install --dev
 
 lint: ## Run code linter
-	$(FLAKE8)
+	$(PIPENV_RUN) flake8 serializer test
 
 test: ## Run all the tests
-	$(NOSE2)
+	$(PIPENV_RUN) nose2
+
+tags: ## Run exuberant ctags
+	ctags --exclude=.venv --exclude=.git -R .
 
 clean: ## Removes .venv folder and __pycache__ files
-	rm -rf $(ENV)
+	rm -rf $(ENV) tags
 	find . -name __pycache__ -type d -exec rm -rf {} \;
 
-.PHONY: help install install-dev lint test clean
+.PHONY: help install install-dev lint test clean tags
