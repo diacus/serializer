@@ -25,8 +25,14 @@ help: ## This play the help
 install: ## Install dependencies for production
 	pipenv install
 
-install-dev: ## Install dependencies for development
+install-dev: tags ## Install dependencies for development
 	pipenv install --dev
+
+install-sys: ## Install the package
+	pip3 install --upgrade .
+
+clean-sys: ## Uninstall the package
+	pip3 uninstall -y serializer
 
 lint: ## Run code linter
 	$(PIPENV_RUN) flake8 serializer test
@@ -37,8 +43,11 @@ test: ## Run all the tests
 tags: ## Run exuberant ctags
 	ctags --exclude=.venv --exclude=.git -R .
 
+shell:
+	$(PIPENV_RUN) ptpython
+
 clean: ## Removes .venv folder and __pycache__ files
 	rm -rf $(ENV) tags
 	find . -name __pycache__ -type d -exec rm -rf {} \;
 
-.PHONY: help install install-dev lint test clean tags
+.PHONY: clean help install install-dev lint shell tags test
